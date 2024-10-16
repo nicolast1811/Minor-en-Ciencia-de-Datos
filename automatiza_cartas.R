@@ -21,7 +21,7 @@ cartas_auto <- function(anio,mes,hoja,parametro_dt){
   #' 
   #' Cuando parametro_dt = 2, nos referimos a "Ago"
   
-  dates_anio <- translate_date(format(seq.Date(from = as.Date(glue::glue("{anio}-01-01")), length.out = 12, by = "month"), "%B_%Y")) #esto varía (anio)
+  dates_anio <- format(seq.Date(from = as.Date(glue::glue("{anio}-01-01")), length.out = 12, by = "month"), "%B_%Y") #esto varía (anio)
   
   letra_mes <- c("B","C","D","E","F","G","H","I","J","K","L","M","N")
   
