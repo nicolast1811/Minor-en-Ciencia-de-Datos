@@ -21,29 +21,21 @@ cartas_auto <- function(anio,mes,hoja,parametro_dt){
   #' 
   #' Cuando parametro_dt = 2, nos referimos a "Ago"
   
-  dates_anio <- format(seq.Date(from = as.Date(glue::glue("{anio}-01-01")), length.out = 12, by = "month"), "%B_%Y") #esto varía (anio)
-  
-  letra_mes <- c("B","C","D","E","F","G","H","I","J","K","L","M","N")
-  
-  nom_col <- list()
-  
+  dates_anio <- format(seq.Date(from = as.Date(glue::glue("{anio}-01-01")), length.out = 12, by = "month"), "%B_%Y") #esto varía (anio) 
+  letra_mes <- c("B","C","D","E","F","G","H","I","J","K","L","M","N")  
+  nom_col <- list() 
   mes <- ifelse(mes==12 , mes<-13, mes<-mes)
-  
-  mes_cartas_anio <- mes
-  
+  mes_cartas_anio <- mes 
   for (n in dates_anio)
   {
     ifelse(mes_cartas_anio == 13, (nom_col <- c(dates_anio[1:12], paste0("total_",anio))), (nom_col <- c(dates_anio[1: mes_cartas_anio])))
   }
-  
   cartas_anio <- read_excel(path = paste0("X:/Datos Mercado Laboral/Coyuntura/INE/Minuta Complementaria Empleo/datos/DT/Cartas_Aviso_",glue::glue('{dt[parametro_dt]}{anio}'), ".xlsx"), #parametro_dt corresponde a la posición 1 0 2 de dt
                             sheet = hoja, #esto varía
                             range = paste0(glue::glue("{letra_mes[1]}"), 4,":", glue::glue("{letra_mes[mes_cartas_anio]}"), 19),
                             col_names = nom_col)
   return(cartas_anio)
 }
-
-?cartas_auto
 
 dt <- c("Dic", "Ago")
 mes_cartas <- 8
